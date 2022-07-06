@@ -1,0 +1,10 @@
+#main-container {
+    display: grid;
+    grid-template-columns: 1fr 100px 1fr;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+    border: 0;
+    padding: 0;
+}

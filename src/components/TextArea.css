@@ -27,3 +27,9 @@
 .text-box:focus {
     color: #ffffff;
 }
+
+textarea::placeholder {
+    color: rgb(72, 201, 249);
+    text-align: center;
+    padding-top: 20%;
+}

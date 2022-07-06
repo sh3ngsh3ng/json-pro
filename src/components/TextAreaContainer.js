@@ -15,6 +15,13 @@ export class TextAreaContainer extends React.Component {
         })
     }
 
+    formatJSON = () => {
+        this.setState({
+            userInputFormatted: JSON.stringify(JSON.parse(this.state.userInput), null, 4)
+        })
+        console.log(this.state.userInputFormatted)
+    }
+
     render() {
         return (
             <React.Fragment>
@@ -25,13 +32,13 @@ export class TextAreaContainer extends React.Component {
                     updateState={this.updateState} 
                     placeholder="Paste your JSON over here!"/>
                     <div>
-                        <button id="btn-1">1</button>
+                        <button onClick={this.formatJSON}>1</button>
                         <p></p>
                         <button>2</button>
                     </div>
                     <TextArea 
                     name="userOutput" 
-                    textDisplay={this.state.userInputFormatted} 
+                    value={this.state.userInputFormatted} 
                     placeholder="Formatted JSON will be displayed here!"
                     read='true' />    
                 </div>

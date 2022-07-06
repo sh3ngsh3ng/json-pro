@@ -10,6 +10,7 @@ export default function TextArea(props) {
                 class='text-box' 
                 placeholder={props.placeholder}
                 onChange={props.updateState}
+                value={props.value}
                 >
                     {props.textDisplay}
                 </textarea>

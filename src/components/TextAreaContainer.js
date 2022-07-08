@@ -9,17 +9,30 @@ export class TextAreaContainer extends React.Component {
         userInputFormatted: ""
     }
 
-    updateState = (evt) => {
+    // updateState = (evt) => {
+    //     this.setState({
+    //         [evt.target.name]: evt.target.value
+    //     })
+    //     console.log(this.state.userInput)
+    // }
+
+    updateState2 = (val, viewUpdate) => {
         this.setState({
-            [evt.target.name]: evt.target.value
+            userInput: val
         })
     }
 
     formatJSON = () => {
-        this.setState({
-            userInputFormatted: JSON.stringify(JSON.parse(this.state.userInput), null, 4)
-        })
-        console.log(this.state.userInputFormatted)
+        try {
+            let formattedJSON = JSON.stringify(JSON.parse(this.state.userInput), null, 4)
+            this.setState({
+                userInputFormatted: formattedJSON
+            })
+        } catch (e) {
+            console.log(e.toString())
+            // console.log(typeof(e))
+            // console.log(e)
+        }
     }
 
     render() {
@@ -29,18 +42,18 @@ export class TextAreaContainer extends React.Component {
                     <TextArea 
                     name="userInput" 
                     textDisplay={this.state.userInput} 
-                    updateState={this.updateState} 
+                    updateState={this.updateState2} 
                     placeholder="Paste your JSON over here!"/>
                     <div>
-                        <button onClick={this.formatJSON}>1</button>
+                        <button onClick={this.formatJSON}>Beautify</button>
                         <p></p>
-                        <button>2</button>
+                        <button onClick={this.formatJSON}>Check</button>
                     </div>
                     <TextArea 
                     name="userOutput" 
                     value={this.state.userInputFormatted} 
                     placeholder="Formatted JSON will be displayed here!"
-                    read='true' />    
+                    editable={false} />    
                 </div>
             </React.Fragment>
 

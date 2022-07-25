@@ -1,22 +1,23 @@
 import React from 'react'
+import AlertNotif from './AlertNotif'
 import TextArea from './TextArea'
 import './TextAreaContainer.css'
+import { alertPop } from '../scripts/script'
 
 export class TextAreaContainer extends React.Component {
 
     state = {
         userInput: "",
-        userInputFormatted: ""
+        userInputFormatted: "",
+        errorMessage: "",
+        testing: ""
     }
 
-    // updateState = (evt) => {
-    //     this.setState({
-    //         [evt.target.name]: evt.target.value
-    //     })
-    //     console.log(this.state.userInput)
-    // }
+    componentDidMount() {
+        alertPop()
+    }
 
-    updateState2 = (val, viewUpdate) => {
+    updateState = (val, viewUpdate) => {
         this.setState({
             userInput: val
         })
@@ -29,20 +30,29 @@ export class TextAreaContainer extends React.Component {
                 userInputFormatted: formattedJSON
             })
         } catch (e) {
-            console.log(e.toString())
-            // console.log(typeof(e))
-            // console.log(e)
+            let errorMessage = e.toString()
+            this.setState({
+                errorMessage
+            })
         }
+    }
+
+    renderPopup = (msg) => {
+        return (
+            <AlertNotif message={msg} />
+        )
     }
 
     render() {
         return (
             <React.Fragment>
+                {this.renderPopup(this.state.errorMessage)}
+                {this.renderPopup(this.state.userInput)}
                 <div id="main-container">
                     <TextArea 
                     name="userInput" 
                     textDisplay={this.state.userInput} 
-                    updateState={this.updateState2} 
+                    updateState={this.updateState} 
                     placeholder="Paste your JSON over here!"/>
                     <div>
                         <button onClick={this.formatJSON}>Beautify</button>
